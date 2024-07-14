@@ -1,0 +1,55 @@
+@page
+@model ComplaintModel
+
+<h3>ThoughtTronix Complaint Form</h3>
+<p>We are sorry to hear that you have a complaint. Please file your complaint below and we will get back to you shortly.</p>
+<form method="post">
+    <hr class="my-4">
+    <h5 class="mb-3">Select a product...</h5>
+    <div class="form-check">
+        <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="1">
+        <label class="form-check-label">MindSync</label>
+    </div>
+    <div class="form-check">
+        <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="2">
+        <label class="form-check-label">Seraphine</label>
+    </div>
+    <div class="form-check">
+        <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="3">
+        <label class="form-check-label">SoulSear</label>
+    </div>
+    <div class="form-check">
+        <input asp-for="SelectedProduct" class="form-check-input" type="radio" value="4">
+        <label class="form-check-label">PhantomClaw</label>
+    </div>
+    <span asp-validation-for="SelectedProduct" class="text-danger"></span>
+    <hr class="my-4">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>    
+    <div class="mb-3">
+        <label asp-for="Message" class="form-label"></label>
+        <textarea asp-for="Message" class="form-control"></textarea>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+    <hr class="my-4">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@if (@Model.Name != string.Empty)
+{
+    <p>Thank you for your complaint about @Model.ProductName - @Model.Name (@Model.Email)</p>
+    <p>@Model.Message</p>
+}
+
+<!-- Add JS code for Data Validation -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
